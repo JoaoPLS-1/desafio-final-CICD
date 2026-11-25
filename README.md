@@ -43,7 +43,7 @@ O proprietário e o nome da imagem usam letras minúsculas. Use um token com wri
 ```powershell
 $env:GHCR_TOKEN | podman login ghcr.io -u JoaoPLS-1 --password-stdin
 $revision = git rev-parse HEAD
-podman build --file Containerfile --build-arg "VCS_REF=$revision" --tag ghcr.io/joaopls-1/desafio-final-cicd:1.0 --tag ghcr.io/joaopls-1/desafio-final-cicd:latest .
+podman build --format docker --file Containerfile --build-arg "VCS_REF=$revision" --tag ghcr.io/joaopls-1/desafio-final-cicd:1.0 --tag ghcr.io/joaopls-1/desafio-final-cicd:latest .
 podman push ghcr.io/joaopls-1/desafio-final-cicd:1.0
 podman push ghcr.io/joaopls-1/desafio-final-cicd:latest
 ```
@@ -75,3 +75,13 @@ Start-Process http://localhost:9001/
 ```
 
 Não é necessário copiar arquivos entre computadores. Não há alegação de conclusão desta etapa sem executar uma imagem real do colega.
+
+## Publicação alternativa sem PAT local
+
+O workflow Publicar imagem GHCR pode ser iniciado manualmente na main pela aba Actions. Ele usa GITHUB_TOKEN temporário com packages:write, testa a imagem e envia as tags 1.0 e latest. Isso permite publicar sem colocar um PAT no computador. A credencial do Git Credential Manager desta máquina autenticou no GHCR, mas seu push foi recusado por falta do escopo write:packages; portanto, a publicação pelo Actions substitui esse push local nesta entrega.
+
+## Registro da execução
+
+- PR da questão 1: https://github.com/JoaoPLS-1/desafio-final-CICD/pull/1, integrado após CI verde.
+- Main atualizada com git pull --ff-only e verificação de igualdade com origin/main.
+- Questão 5 dispensada pelo usuário por não haver uma imagem de colega informada.
