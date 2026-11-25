@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Entrega prática de integração contínua e distribuição de um site com GitHub Actions, Podman e GHCR.">
+  <title>Entrega final | DevOps</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#inicio">JP<span> / DEVOPS</span></a><a href="https://github.com/JoaoPLS-1/desafio-final-CICD">Ver repositório</a></header>
+  <main id="inicio">
+    <section class="hero">
+      <p class="eyebrow">LABORATÓRIO DE SOFTWARE · ENTREGA FINAL</p>
+      <h1>Do primeiro commit<br>ao <em>container.</em></h1>
+      <p class="intro">Um site simples. Um fluxo completo de entrega: código versionado, validação automática e uma imagem que pode rodar em qualquer máquina com Podman.</p>
+      <a class="button" href="#fluxo">Explore o fluxo</a>
+      <div class="terminal" aria-label="Exemplo de execução com Podman"><div class="terminal-title">TERMINAL / EXECUÇÃO LOCAL</div><code><span>$</span> podman run --rm -p 9000:80 \
+  ghcr.io/joaopls-1/desafio-final-cicd:1.0</code><p>Depois de iniciar o container, acesse localhost:9000.</p></div>
+    </section>
+    <section id="fluxo" class="flow"><div><p class="eyebrow">COMO A ENTREGA FUNCIONA</p><h2>O mesmo código.<br>Em cada etapa.</h2></div><ol>
+      <li><h3>Versionar</h3><p>A alteração nasce na branch feature/entrega-final e segue para revisão em um Pull Request.</p></li>
+      <li><h3>Validar</h3><p>O GitHub Actions verifica a página e testa a imagem antes do merge na main.</p></li>
+      <li><h3>Distribuir</h3><p>A imagem do site fica no GitHub Container Registry, com versão e referência ao código de origem.</p></li>
+      <li><h3>Executar</h3><p>O Podman baixa a imagem do Registry e serve o site na porta 9000, sem precisar copiar os arquivos do projeto.</p></li>
+    </ol></section>
+    <section class="details"><h2>Pequeno por fora.<br>Completo por dentro.</h2><p>HTML e CSS, servidos pelo Nginx em um container. O README documenta os comandos e as evidências da entrega.</p><a href="https://github.com/JoaoPLS-1/desafio-final-CICD#readme">Consultar documentação</a></section>
+  </main>
+</body>
+</html>

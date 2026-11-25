@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+assert.match(html, /<!doctype html>/i);
+assert.match(html, /<html lang="pt-BR">/);
+assert.match(html, /name="viewport"/);
+assert.match(html, /<title>[^<]+<\/title>/);
+assert.match(html, /<main[\s>]/);
+assert.match(html, /href="styles.css"/);
+assert.ok(readFileSync(new URL('../styles.css', import.meta.url), 'utf8').length > 0);
+const final = readFileSync(new URL('../VERSION', import.meta.url), 'utf8').trim() === '1.0';
+if (final) assert.match(html, /<footer>Versão Final 1\.0 - JoaoPLS-1<\/footer>/);
+console.log(`Site validado${final ? ' com rodapé da versão final' : ''}.`);
